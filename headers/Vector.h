@@ -12,7 +12,6 @@ using std::size_t;
 template <class T>
 class Vector {
     public:
-        //pavadinimai
         typedef T* iterator;
         typedef const iterator const_iterator;
         typedef ptrdiff_t difference_type;
@@ -28,7 +27,7 @@ class Vector {
         if (&a == this)  return *this;
         uncreate();
         create(a.begin(), a.end());
-        //cout << "naudojama copy semantika" << endl;
+        // naudojama copy semantika
         return *this;
 
     }
@@ -39,7 +38,7 @@ class Vector {
         std::swap(a.data, data);
         std::swap(a.avail, avail);
         std::swap(a.limit, limit);
-        //cout << "naudojama move semantika" << endl;
+        // naudojama move semantika
     }
     ~Vector() { uncreate(); }
     T& operator[](size_type i) {
@@ -85,9 +84,6 @@ class Vector {
     const_iterator begin() const { return data; }
     iterator end() { return avail; }
     const_iterator end() const { return avail; }
-    //Returns a reverse iterator to the first element of the reversed container.
-    // It corresponds to the last element of the non-reversed container.
-    // If the container is empty, the returned iterator is equal to rend().
     iterator rbegin()
     {
         iterator it = limit;
@@ -253,7 +249,7 @@ private:
 
         data = alloc.allocate(n);
         limit = avail = data + n;
-        std::uninitialized_fill(data, limit, val); // Copies the given value to an uninitialized memory area, defined by the range [first, last)
+        std::uninitialized_fill(data, limit, val);
     }
     void create(const_iterator i, const_iterator j) {
         data = alloc.allocate(j - i);
@@ -273,11 +269,10 @@ private:
     void grow()
     {
         size_type new_size;
-        new_size = std::max(2 * (limit - data), ptrdiff_t(1)); //is used for pointer arithmetic and array indexing
+        new_size = std::max(2 * (limit - data), ptrdiff_t(1));
 
         iterator new_data = alloc.allocate(new_size);
-        iterator new_avail = std::uninitialized_copy(data, avail, new_data); //Copies elements from the range [first, last) to an uninitialized memory area beginning at d_first
-
+        iterator new_avail = std::uninitialized_copy(data, avail, new_data);
         uncreate();
 
         data = new_data;

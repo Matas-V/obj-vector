@@ -1,5 +1,5 @@
 #include "headers/main.h"
-#include <vector>
+// #include <vector>
 #include "funkcijos.cpp"
 
 int main() {
@@ -7,18 +7,9 @@ int main() {
   string med, gen, k, genf;
   bool pass=0;
   Vector<studentas> mas;
-  Vector<int> b;
-  vector<int> a;
-  b.push_back(20); b.push_back(40); b.push_back(50); b.push_back(99);
-  a.push_back(1); a.push_back(2); a.push_back(3); a.push_back(4);
   studentas S;
   mas.reserve(2);
   srand(time(0));
-
-  cout << a.max_size() << endl;
-  cout << b.max_size() << endl;
-  cout << a.size() << endl;
-  cout << b.size() << endl;
 
   input_check(gen, "Ar duomenis ivedinesite(1) pats ar sugeneruoti(0)?");
 
@@ -62,7 +53,7 @@ int main() {
     }
   }
 
-  // unsigned int sz = 100000000;
+  // unsigned int sz = 1000000000;
   // vector<int> v1;
   // int v1_add = 0, szs = 0;
   // auto start = std::chrono::high_resolution_clock::now();
@@ -79,6 +70,7 @@ int main() {
   // cout << "vector perskirstymas: " << v1_add << endl;
 
   // Vector<int> v2;
+  // v1_add = 0; szs = 0;
   // start = std::chrono::high_resolution_clock::now();
   // for (int i = 1; i <= sz; ++i) {
   //   if (v2.capacity() != szs) {

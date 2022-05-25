@@ -17,9 +17,12 @@ class Vector {
         typedef ptrdiff_t difference_type;
         typedef size_t size_type;
         typedef T value_type;
+        typedef value_type &reference;
+        typedef const value_type &const_reference;
         Vector() { create(); }
         explicit Vector(size_type n, const T& value = T{}) { create(n, value); }
         Vector(const Vector& a) { create(a.begin(), a.end()); }
+        ~Vector() { uncreate(); }
 
     // Operatoriai
     Vector& operator=(const Vector& a)
@@ -40,8 +43,7 @@ class Vector {
         std::swap(a.limit, limit);
         // naudojama move semantika
     }
-    ~Vector() { uncreate(); }
-    T& operator[](size_type i) {
+    reference operator[](size_type i) {
 
         try {
             if (i > size() || i < 0) throw std::out_of_range("pasiektas [] operatoriaus limitas");
@@ -55,7 +57,7 @@ class Vector {
         return data[i];
 
     }
-    const T& operator[](size_type i) const {
+    const_reference operator[](size_type i) const {
         try {
             if (i > size() || i < 0) throw std::out_of_range("pasiektas [] operatoriaus limitas");
         }
@@ -105,25 +107,25 @@ class Vector {
         return ++it;
     }
     // Elementų pasiekiamumas
-    T& front()
+    reference front()
     {
         return *data;
     }
-    const T& front() const
+    const_reference front() const
     {
         return *data;
     }
-    T& back()
+    reference back()
     {
         iterator it = avail;
         return *(--it);
     }
-    const T& back() const
+    const_reference back() const
     {
         iterator it = avail;
         return *(--it);
     }
-    T& at(size_type pos)
+    reference at(size_type pos)
     {
         try {
             if (size() <= pos || pos < 0) throw std::out_of_range("Ivyko klaida su at - out of range");
@@ -136,7 +138,7 @@ class Vector {
 
         return data[pos];
     }
-    const T& at(size_type pos) const
+    const_reference at(size_type pos) const
     {
         try {
             if (size() <= pos || pos < 0) throw std::out_of_range("Ivyko klaida su at - out of range");
